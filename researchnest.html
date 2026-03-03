@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ResearchNest — Academic Research & Data Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --navy2: #111827;
+    --navy3: #1a2540;
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --gold-light: #f5e6b8;
+    --white: #ffffff;
+    --off-white: #f8f6f1;
+    --text-light: #94a3b8;
+    --text-mid: #cbd5e1;
+    --accent-blue: #3b82f6;
+    --accent-teal: #0d9488;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,15,30,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    transition: all 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-mid); text-decoration: none;
+    font-size: 0.875rem; font-weight: 500; letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold2) !important; color: var(--navy) !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(59,130,246,0.06) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 5%; max-width: 1200px; margin: 0 auto; width: 100%;
+    padding-top: 100px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--white);
+    max-width: 750px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-title .highlight {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem; line-height: 1.7;
+    color: var(--text-light);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 500; font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem; padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-light); margin-top: 0.3rem; letter-spacing: 0.5px; }
+
+  /* ── SECTIONS GENERAL ── */
+  section { padding: 100px 5%; }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .section-title.light { color: var(--white); }
+
+  .section-sub {
+    font-size: 1rem; line-height: 1.7;
+    color: #64748b;
+    max-width: 560px;
+  }
+
+  .section-sub.light { color: var(--text-light); }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--off-white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: transparent; }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--navy), var(--navy3));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.9rem; line-height: 1.7;
+    color: #64748b;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  .tag {
+    background: var(--off-white);
+    border: 1px solid #e2e8f0;
+    color: var(--navy3);
+    font-size: 0.72rem; font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 50px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── TOOLS / METHODS ── */
+  #tools { background: var(--navy); }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .tool-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .tool-card:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-4px);
+  }
+
+  .tool-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .tool-name { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+  .tool-desc { font-size: 0.75rem; color: var(--text-light); line-height: 1.5; }
+
+  /* ── LEARNING MODULES ── */
+  #modules { background: var(--white); }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .module-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .module-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.1); transform: translateY(-4px); }
+
+  .module-header {
+    padding: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .module-num {
+    width: 40px; height: 40px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-weight: 700; font-size: 0.9rem;
+    color: var(--white); flex-shrink: 0;
+  }
+
+  .module-meta { }
+  .module-category { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #94a3b8; }
+  .module-name { font-weight: 600; color: var(--navy); font-size: 1rem; margin-top: 0.1rem; }
+
+  .module-body { padding: 0 1.5rem 1.5rem; }
+  .module-desc { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem; }
+
+  .module-topics { list-style: none; }
+  .module-topics li {
+    font-size: 0.82rem; color: #475569;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .module-topics li::before { content: '→'; color: var(--gold); font-size: 0.75rem; }
+  .module-topics li:last-child { border-bottom: none; }
+
+  .module-footer {
+    padding: 1rem 1.5rem;
+    background: var(--off-white);
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .module-level {
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.25rem 0.75rem; border-radius: 50px;
+  }
+  .level-beginner { background: #dcfce7; color: #166534; }
+  .level-intermediate { background: #fef9c3; color: #854d0e; }
+  .level-advanced { background: #fee2e2; color: #991b1b; }
+
+  .module-link {
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--gold); text-decoration: none;
+    display: flex; align-items: center; gap: 0.3rem;
+    transition: gap 0.2s;
+  }
+  .module-link:hover { gap: 0.6rem; }
+
+  /* ── BLOG ── */
+  #blog { background: var(--off-white); }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .blog-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s;
+  }
+
+  .blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+
+  .blog-thumb {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    position: relative; overflow: hidden;
+  }
+
+  .blog-body { padding: 1.5rem; }
+  .blog-cat {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .blog-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 600; line-height: 1.4;
+    color: var(--navy); margin-bottom: 0.75rem;
+    text-decoration: none; display: block;
+  }
+  .blog-title:hover { color: var(--gold); }
+  .blog-excerpt { font-size: 0.85rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem; }
+  .blog-meta { font-size: 0.75rem; color: #94a3b8; display: flex; gap: 1rem; }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--white); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    max-width: 1000px; margin-left: auto; margin-right: auto;
+  }
+
+  .price-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .price-card:hover { transform: translateY(-6px); box-shadow: 0 24px 64px rgba(0,0,0,0.1); }
+
+  .price-card.featured {
+    background: var(--navy);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold), 0 24px 64px rgba(201,168,76,0.15);
+  }
+
+  .price-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem; border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  .price-plan { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .price-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; }
+  .price-card.featured .price-name { color: var(--white); }
+  .price-amount { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--navy); line-height: 1; margin-bottom: 0.25rem; }
+  .price-card.featured .price-amount { color: var(--gold); }
+  .price-period { font-size: 0.8rem; color: #94a3b8; margin-bottom: 2rem; }
+  .price-desc { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; }
+  .price-card.featured .price-desc { color: var(--text-light); border-bottom-color: rgba(255,255,255,0.1); }
+  .price-features { list-style: none; margin-bottom: 2rem; }
+  .price-features li { font-size: 0.875rem; color: #475569; padding: 0.4rem 0; display: flex; gap: 0.6rem; align-items: flex-start; }
+  .price-card.featured .price-features li { color: var(--text-mid); }
+  .price-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .price-btn { width: 100%; text-align: center; display: block; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--navy); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; margin-top: 3rem;
+  }
+
+  .about-text .section-title { margin-bottom: 1.5rem; }
+  .about-text p { color: var(--text-light); line-height: 1.8; margin-bottom: 1.25rem; font-size: 0.95rem; }
+
+  .about-values {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .value-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 1.25rem;
+    transition: all 0.3s;
+  }
+  .value-item:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); }
+  .value-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .value-title { font-weight: 600; color: var(--white); font-size: 0.9rem; margin-bottom: 0.25rem; }
+  .value-text { font-size: 0.8rem; color: var(--text-light); line-height: 1.5; }
+
+  .about-visual {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 2.5rem;
+  }
+
+  .expertise-item {
+    margin-bottom: 1.5rem;
+  }
+  .exp-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+  .exp-name { font-size: 0.875rem; font-weight: 500; color: var(--white); }
+  .exp-pct { font-size: 0.8rem; color: var(--gold); font-family: 'DM Mono', monospace; }
+  .exp-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+  .exp-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 4px; transition: width 1s ease; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--off-white); }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem;
+    margin-top: 3rem; align-items: start;
+  }
+
+  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+  .contact-info p { font-size: 0.9rem; color: #64748b; line-height: 1.7; margin-bottom: 2rem; }
+
+  .contact-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+  .contact-icon {
+    width: 40px; height: 40px; background: var(--navy); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-detail { }
+  .contact-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #94a3b8; }
+  .contact-value { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-top: 0.1rem; }
+
+  .contact-form {
+    background: var(--white);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2.5rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; letter-spacing: 0.3px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--navy);
+    background: var(--off-white);
+    transition: all 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold); background: var(--white);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
+  .form-group textarea { height: 120px; resize: vertical; }
+
+  .form-success {
+    display: none;
+    text-align: center; padding: 2rem;
+    color: #166534; background: #dcfce7; border-radius: 8px;
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050a14;
+    padding: 4rem 5% 2rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { font-size: 1.3rem; display: block; margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; max-width: 280px; }
+
+  .footer-col h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a { font-size: 0.85rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: #475569; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 70px; left: 0; right: 0;
+      background: var(--navy2); padding: 2rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1.5rem;
+    }
+    .hero-stats { gap: 2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .about-values { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Research<span>Nest</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#tools">Methods</a></li>
+    <li><a href="#modules">Learn</a></li>
+    <li><a href="#blog">Articles</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ Academic Research & Data Analysis</div>
+    <h1 class="hero-title">
+      Your Research,<br/>
+      <span class="highlight">Guided with Precision</span>
+    </h1>
+    <p class="hero-sub">
+      Professional research assistance, data collection, and analysis support for students and working professionals worldwide. From methodology to final report.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#modules" class="btn-outline">Free Learning Modules</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Analysis Tools</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Confidential</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Global</div>
+        <div class="stat-label">Clients Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">What We Offer</span>
+      <h2 class="section-title">Research Services</h2>
+      <p class="section-sub">End-to-end support for your academic and professional research needs — from planning to final submission.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🔍</div>
+        <h3 class="service-title">Research Assistance</h3>
+        <p class="service-desc">Expert guidance throughout your research journey. Topic selection, problem formulation, literature review, and research design tailored to your field.</p>
+        <div class="service-tags">
+          <span class="tag">Topic Selection</span>
+          <span class="tag">Literature Review</span>
+          <span class="tag">Research Design</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📊</div>
+        <h3 class="service-title">Data Collection</h3>
+        <p class="service-desc">Both primary and secondary data collection. Survey design, interview structuring, questionnaire development, and sourcing reliable secondary datasets.</p>
+        <div class="service-tags">
+          <span class="tag">Primary Data</span>
+          <span class="tag">Secondary Data</span>
+          <span class="tag">Survey Design</span>
+          <span class="tag">Questionnaires</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📈</div>
+        <h3 class="service-title">Data Analysis</h3>
+        <p class="service-desc">Advanced statistical and econometric analysis using industry-standard tools. From descriptive statistics to complex regression and time-series models.</p>
+        <div class="service-tags">
+          <span class="tag">SPSS</span>
+          <span class="tag">Stata</span>
+          <span class="tag">Python</span>
+          <span class="tag">EViews</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🧪</div>
+        <h3 class="service-title">Qualitative Research</h3>
+        <p class="service-desc">Thematic analysis, content analysis, grounded theory, and case study research. Rigorous qualitative frameworks for social science and humanities research.</p>
+        <div class="service-tags">
+          <span class="tag">Thematic Analysis</span>
+          <span class="tag">Case Studies</span>
+          <span class="tag">Interviews</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📉</div>
+        <h3 class="service-title">Quantitative Research</h3>
+        <p class="service-desc">Hypothesis testing, regression analysis, structural equation modeling, and statistical inference. Turning raw numbers into meaningful academic findings.</p>
+        <div class="service-tags">
+          <span class="tag">Regression</span>
+          <span class="tag">Hypothesis Testing</span>
+          <span class="tag">SEM</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">⚙️</div>
+        <h3 class="service-title">Engineering Research Support</h3>
+        <p class="service-desc">Specialized support for IT and engineering thesis projects. Tool development guidance, technical literature review, and methodology frameworks for applied research.</p>
+        <div class="service-tags">
+          <span class="tag">IT Research</span>
+          <span class="tag">Cybersecurity</span>
+          <span class="tag">Networking</span>
+          <span class="tag">Cloud</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Our Methods & Tools</span>
+      <h2 class="section-title light">Analysis Tools We Use</h2>
+      <p class="section-sub light">We work across all major statistical and econometric platforms used in academic and professional research.</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <div class="tool-icon">📊</div>
+        <div class="tool-name">SPSS</div>
+        <div class="tool-desc">Descriptive stats, regression, factor analysis, ANOVA, cross-tabulation</div>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">📐</div>
+        <div class="tool-name">Stata</div>
+        <div class="tool-desc">Panel data, econometrics, survival analysis, instrumental variables</div>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🐍</div>
+        <div class="tool-name">Python</div>
+        <div class="tool-desc">Data wrangling, visualization, ML models, NLP, web scraping</div>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">📈</div>
+        <div class="tool-name">EViews</div>
+        <div class="tool-desc">Time series analysis, VAR, ARCH/GARCH, cointegration tests</div>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">📋</div>
+        <div class="tool-name">Excel</div>
+        <div class="tool-desc">Data cleaning, pivot tables, basic statistics, chart creation</div>
+      </div>
+      <div class="tool-card reveal">
+        <div class="tool-icon">🔬</div>
+        <div class="tool-name">R</div>
+        <div class="tool-desc">Advanced statistics, ggplot2 visualization, bioinformatics, mixed models</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING MODULES -->
+<section id="modules">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Free Learning Resources</span>
+      <h2 class="section-title">Research Learning Modules</h2>
+      <p class="section-sub">Step-by-step tutorials designed for students at every level. Learn to conduct and analyze research independently.</p>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card reveal">
+        <div class="module-header">
+          <div class="module-num" style="background: linear-gradient(135deg, #1a2540, #0a0f1e);">01</div>
+          <div class="module-meta">
+            <div class="module-category">Foundations</div>
+            <div class="module-name">Introduction to Research Methods</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Learn the fundamentals of academic research including qualitative vs. quantitative approaches, research design, and academic writing.</p>
+          <ul class="module-topics">
+            <li>Types of research: qualitative vs. quantitative</li>
+            <li>How to write a research problem statement</li>
+            <li>Literature review step-by-step</li>
+            <li>Research ethics and plagiarism</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-level level-beginner">Beginner</span>
+          <a href="#contact" class="module-link">Start Learning →</a>
+        </div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-header">
+          <div class="module-num" style="background: linear-gradient(135deg, #c9a84c, #9a7a30);">02</div>
+          <div class="module-meta">
+            <div class="module-category">Data Collection</div>
+            <div class="module-name">Survey & Questionnaire Design</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Master the art of designing effective surveys and questionnaires for primary data collection in academic research.</p>
+          <ul class="module-topics">
+            <li>Likert scales and response formats</li>
+            <li>Sampling methods and sample size calculation</li>
+            <li>Google Forms and survey tools</li>
+            <li>Avoiding bias in question design</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-level level-beginner">Beginner</span>
+          <a href="#contact" class="module-link">Start Learning →</a>
+        </div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-header">
+          <div class="module-num" style="background: linear-gradient(135deg, #0d9488, #065f59);">03</div>
+          <div class="module-meta">
+            <div class="module-category">Analysis</div>
+            <div class="module-name">SPSS for Beginners</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">A complete beginner-friendly guide to running statistical analysis in SPSS — from data entry to interpretation of results.</p>
+          <ul class="module-topics">
+            <li>Data entry and variable setup in SPSS</li>
+            <li>Descriptive statistics and frequency tables</li>
+            <li>Running regression and ANOVA</li>
+            <li>Reading and reporting SPSS output</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-level level-intermediate">Intermediate</span>
+          <a href="#contact" class="module-link">Start Learning →</a>
+        </div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-header">
+          <div class="module-num" style="background: linear-gradient(135deg, #7c3aed, #4c1d95);">04</div>
+          <div class="module-meta">
+            <div class="module-category">Analysis</div>
+            <div class="module-name">Python for Data Analysis</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Learn how to use Python with pandas, matplotlib, and seaborn to clean, analyze, and visualize research data.</p>
+          <ul class="module-topics">
+            <li>Setting up Python and Jupyter Notebook</li>
+            <li>Data cleaning with pandas</li>
+            <li>Statistical tests with scipy</li>
+            <li>Visualizing research findings with charts</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-level level-intermediate">Intermediate</span>
+          <a href="#contact" class="module-link">Start Learning →</a>
+        </div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-header">
+          <div class="module-num" style="background: linear-gradient(135deg, #dc2626, #7f1d1d);">05</div>
+          <div class="module-meta">
+            <div class="module-category">Econometrics</div>
+            <div class="module-name">EViews for Time Series</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Master time series econometrics using EViews — from unit root tests to VAR models and forecasting.</p>
+          <ul class="module-topics">
+            <li>Unit root and stationarity tests (ADF, PP)</li>
+            <li>Cointegration and error correction models</li>
+            <li>VAR and Granger causality</li>
+            <li>ARCH/GARCH for volatility modeling</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-level level-advanced">Advanced</span>
+          <a href="#contact" class="module-link">Start Learning →</a>
+        </div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-header">
+          <div class="module-num" style="background: linear-gradient(135deg, #ea580c, #7c2d12);">06</div>
+          <div class="module-meta">
+            <div class="module-category">Qualitative</div>
+            <div class="module-name">Thematic & Content Analysis</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">A practical guide to conducting rigorous qualitative analysis using thematic, content, and discourse analysis methods.</p>
+          <ul class="module-topics">
+            <li>Coding qualitative data step by step</li>
+            <li>Developing themes from interviews</li>
+            <li>NVivo basics for qualitative research</li>
+            <li>Writing up qualitative findings</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-level level-intermediate">Intermediate</span>
+          <a href="#contact" class="module-link">Start Learning →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Research Articles</span>
+      <h2 class="section-title">Latest from the Blog</h2>
+      <p class="section-sub">Practical articles, guides, and insights on research methodology, data analysis, and academic writing.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-thumb" style="background: linear-gradient(135deg, #0a0f1e, #1a2540);">📊</div>
+        <div class="blog-body">
+          <div class="blog-cat">Data Analysis</div>
+          <a href="#" class="blog-title">How to Choose the Right Statistical Test for Your Research</a>
+          <p class="blog-excerpt">A practical decision-making guide for students — from t-tests to regression, know exactly which test fits your data type and research question.</p>
+          <div class="blog-meta"><span>📅 March 2025</span><span>⏱ 8 min read</span></div>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-thumb" style="background: linear-gradient(135deg, #1a4030, #0d6e4e);">🔍</div>
+        <div class="blog-body">
+          <div class="blog-cat">Research Methods</div>
+          <a href="#" class="blog-title">Qualitative vs. Quantitative Research: Which Should You Choose?</a>
+          <p class="blog-excerpt">Understanding the core differences, strengths, and limitations of each approach to help you design a stronger research methodology.</p>
+          <div class="blog-meta"><span>📅 February 2025</span><span>⏱ 6 min read</span></div>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-thumb" style="background: linear-gradient(135deg, #2d1a00, #7c4a00);">📝</div>
+        <div class="blog-body">
+          <div class="blog-cat">Academic Writing</div>
+          <a href="#" class="blog-title">Writing a Strong Literature Review: Step-by-Step Guide</a>
+          <p class="blog-excerpt">Most students struggle with literature reviews. This guide breaks it down into clear, manageable steps that will strengthen any thesis or research paper.</p>
+          <div class="blog-meta"><span>📅 January 2025</span><span>⏱ 10 min read</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-tag">Transparent Pricing</span>
+      <h2 class="section-title">Simple, Clear Pricing</h2>
+      <p class="section-sub" style="margin: 0 auto;">Choose the level of support that fits your research needs and budget.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-plan">Standard</div>
+        <div class="price-name">Research Guide</div>
+        <div class="price-amount">€200</div>
+        <div class="price-period">per project</div>
+        <p class="price-desc">Complete research support with literature review, data collection, and analysis — no coding tool required.</p>
+        <ul class="price-features">
+          <li>Topic selection & problem statement</li>
+          <li>Full literature review</li>
+          <li>Survey/questionnaire design</li>
+          <li>Primary & secondary data collection</li>
+          <li>Statistical analysis & reporting</li>
+          <li>Qualitative or quantitative methods</li>
+        </ul>
+        <a href="#contact" class="btn-outline price-btn" style="border-color: #e2e8f0; color: var(--navy);">Get Started</a>
+      </div>
+
+      <div class="price-card featured reveal">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-plan">Premium</div>
+        <div class="price-name">Research + Tool</div>
+        <div class="price-amount">€500</div>
+        <div class="price-period">per project</div>
+        <p class="price-desc">Everything in Standard plus a custom-built practical tool — ideal for engineering and IT theses.</p>
+        <ul class="price-features">
+          <li>Everything in Standard plan</li>
+          <li>Custom software tool development</li>
+          <li>Tool testing & documentation</li>
+          <li>Visual demonstration & screenshots</li>
+          <li>Technical methodology chapter</li>
+          <li>Priority support & revisions</li>
+        </ul>
+        <a href="#contact" class="btn-primary price-btn">Get Started</a>
+      </div>
+
+      <div class="price-card reveal">
+        <div class="price-plan">Module</div>
+        <div class="price-name">Data Analysis Only</div>
+        <div class="price-amount">€120</div>
+        <div class="price-period">per project</div>
+        <p class="price-desc">Already have your data? We clean, analyze, and interpret it using SPSS, Stata, Python, or EViews.</p>
+        <ul class="price-features">
+          <li>Data cleaning & preparation</li>
+          <li>Statistical analysis (your choice of tool)</li>
+          <li>Charts & visualizations</li>
+          <li>Written interpretation of results</li>
+          <li>One round of revisions</li>
+        </ul>
+        <a href="#contact" class="btn-outline price-btn" style="border-color: #e2e8f0; color: var(--navy);">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="section-tag">About ResearchNest</span>
+        <h2 class="section-title light">Research Guidance You Can Trust</h2>
+        <p>ResearchNest is a professional research consultancy providing academic support, data analysis, and learning resources to students and professionals globally.</p>
+        <p>We specialize in both social science and engineering research — helping clients navigate complex methodologies, analyze data with precision, and produce work that meets the highest academic standards.</p>
+        <p>Our approach is confidential, personalized, and results-driven. We don't just do the work — we help you understand it.</p>
+        <div class="about-values">
+          <div class="value-item">
+            <div class="value-icon">🔒</div>
+            <div class="value-title">100% Confidential</div>
+            <div class="value-text">Your project and identity are always protected</div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🌍</div>
+            <div class="value-title">Global Reach</div>
+            <div class="value-text">Serving students across Europe, Asia, and beyond</div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🎓</div>
+            <div class="value-title">Academic Standard</div>
+            <div class="value-text">All work meets university-level requirements</div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">⚡</div>
+            <div class="value-title">Fast Turnaround</div>
+            <div class="value-text">Deadlines respected, always</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <h3 style="color: var(--white); font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 2rem;">Areas of Expertise</h3>
+        <div class="expertise-item">
+          <div class="exp-header"><span class="exp-name">Quantitative Research & Statistics</span><span class="exp-pct">95%</span></div>
+          <div class="exp-bar"><div class="exp-fill" style="width:95%"></div></div>
+        </div>
+        <div class="expertise-item">
+          <div class="exp-header"><span class="exp-name">Data Analysis (SPSS, Stata, Python)</span><span class="exp-pct">92%</span></div>
+          <div class="exp-bar"><div class="exp-fill" style="width:92%"></div></div>
+        </div>
+        <div class="expertise-item">
+          <div class="exp-header"><span class="exp-name">Qualitative Research Methods</span><span class="exp-pct">88%</span></div>
+          <div class="exp-bar"><div class="exp-fill" style="width:88%"></div></div>
+        </div>
+        <div class="expertise-item">
+          <div class="exp-header"><span class="exp-name">Engineering & IT Research</span><span class="exp-pct">85%</span></div>
+          <div class="exp-bar"><div class="exp-fill" style="width:85%"></div></div>
+        </div>
+        <div class="expertise-item">
+          <div class="exp-header"><span class="exp-name">Econometrics (EViews, Stata)</span><span class="exp-pct">90%</span></div>
+          <div class="exp-bar"><div class="exp-fill" style="width:90%"></div></div>
+        </div>
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08);">
+          <p style="font-size: 0.85rem; color: var(--text-light); line-height: 1.7;">Fields covered: Social Sciences, Economics, Information Technology, Cybersecurity, Networking, Business, Public Health, Education, and more.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Start Your Research Journey</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3>Let's Talk About Your Project</h3>
+        <p>Whether you have a clear research topic or are just getting started, reach out and we'll guide you toward the right approach. All enquiries are confidential.</p>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-detail">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">hello@researchnest.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div class="contact-detail">
+            <div class="contact-label">WhatsApp / Telegram</div>
+            <div class="contact-value">Available on request</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-detail">
+            <div class="contact-label">Response Time</div>
+            <div class="contact-value">Within 24 hours</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌍</div>
+          <div class="contact-detail">
+            <div class="contact-label">Serving</div>
+            <div class="contact-value">Global — All time zones welcome</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div id="formSuccess" class="form-success">
+          ✅ Thank you! We'll get back to you within 24 hours.
+        </div>
+        <div id="formBody">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" placeholder="Your first name" id="fname"/>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" placeholder="Your last name" id="lname"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" placeholder="your@email.com" id="email"/>
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>Research Assistance</option>
+              <option>Data Collection</option>
+              <option>Data Analysis (SPSS / Stata / Python / EViews)</option>
+              <option>Qualitative Research</option>
+              <option>Quantitative Research</option>
+              <option>Engineering / IT Research + Tool</option>
+              <option>Learning Module Enquiry</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell Us About Your Project</label>
+            <textarea placeholder="Briefly describe your research topic, deadline, and what support you need..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%; font-size:1rem; padding: 1rem;" onclick="submitForm()">Send Enquiry →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">Research<span>Nest</span></a>
+      <p>Professional academic research guidance, data analysis, and learning resources for students and professionals worldwide.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Research Assistance</a></li>
+        <li><a href="#services">Data Collection</a></li>
+        <li><a href="#services">Data Analysis</a></li>
+        <li><a href="#services">Qualitative Research</a></li>
+        <li><a href="#services">Quantitative Research</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="#modules">Research Methods</a></li>
+        <li><a href="#modules">SPSS Tutorial</a></li>
+        <li><a href="#modules">Python Analysis</a></li>
+        <li><a href="#modules">EViews Guide</a></li>
+        <li><a href="#blog">Articles</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 ResearchNest. All rights reserved.</p>
+    <p style="color: var(--gold); font-size: 0.8rem;">Confidential · Professional · Global</p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav background
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background =
+      window.scrollY > 50 ? 'rgba(10,15,30,0.98)' : 'rgba(10,15,30,0.95)';
+  });
+
+  // Form submit
+  function submitForm() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!fname || !email) { alert('Please fill in your name and email.'); return; }
+    document.getElementById('formBody').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // Animate skill bars on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.exp-fill').forEach(bar => {
+          bar.style.width = bar.style.width;
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.about-visual').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>
